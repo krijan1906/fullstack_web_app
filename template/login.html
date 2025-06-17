@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, #3b5998 0%, #87ceeb 70%, #f5f6f5 100%); /* Realistic sky to horizon */
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background Container */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Realistic Mountains */
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 65%;
+            background: linear-gradient(to top, #2e3b4e 0%, #5c6b7f 50%, #a3bffa 100%); /* Distant mountain with snow-like peaks */
+            clip-path: polygon(
+                0 100%, 5% 85%, 10% 90%, 15% 80%, 20% 88%, 25% 82%, 30% 90%, 
+                35% 85%, 40% 80%, 45% 87%, 50% 83%, 55% 88%, 60% 82%, 65% 85%, 
+                70% 80%, 75% 87%, 80% 83%, 85% 88%, 90% 82%, 95% 85%, 100% 100%
+            );
+            animation: moveMountain 60s linear infinite; /* Very slow for realism */
+            opacity: 0.7;
+            filter: blur(2px); /* Softer edges */
+        }
+
+        .mountain:nth-child(2) {
+            height: 55%;
+            background: linear-gradient(to top, #3c4f3a 0%, #6b8e23 50%, #b0c4de 100%); /* Midground with greenery */
+            clip-path: polygon(
+                0 100%, 7% 80%, 14% 85%, 21% 78%, 28% 83%, 35% 80%, 42% 85%, 
+                49% 80%, 56% 83%, 63% 78%, 70% 85%, 77% 80%, 84% 83%, 91% 78%, 
+                98% 80%, 100% 100%
+            );
+            animation: moveMountain 50s linear infinite;
+            animation-delay: -15s;
+            opacity: 0.85;
+            filter: blur(1px);
+        }
+
+        .mountain:nth-child(3) {
+            height: 45%;
+            background: linear-gradient(to top, #355e3b 0%, #8fbc8f 50%, #d3d3d3 100%); /* Foreground with rocky texture */
+            clip-path: polygon(
+                0 100%, 9% 75%, 18% 80%, 27% 70%, 36% 78%, 45% 73%, 54% 80%, 
+                63% 75%, 72% 78%, 81% 70%, 90% 75%, 99% 80%, 100% 100%
+            );
+            animation: moveMountain 40s linear infinite;
+            animation-delay: -25s;
+            opacity: 1;
+        }
+
+        @keyframes moveMountain {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Clouds */
+        .clouds {
+            position: absolute;
+            top: 10%;
+            width: 200%;
+            height: 20%;
+            background: radial-gradient(ellipse, rgba(255, 255, 255, 0.6) 30%, transparent 70%);
+            animation: moveClouds 80s linear infinite;
+            opacity: 0.5;
+            filter: blur(10px);
+        }
+
+        .clouds:nth-child(2) {
+            top: 20%;
+            animation: moveClouds 70s linear infinite;
+            animation-delay: -20s;
+            opacity: 0.4;
+        }
+
+        @keyframes moveClouds {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Fog Effect */
+        .fog {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 25%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.6), transparent);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Sun Effect */
+        .sun {
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255, 245, 200, 0.9) 20%, transparent 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 245, 200, 0.5);
+            z-index: -2;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.25); /* Slightly less transparent for readability */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-in-out;
+            backdrop-filter: blur(10px); /* Strong blur for contrast */
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #2e3b4e; /* Match mountain tones */
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2e3b4e;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #2e3b4e;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #a3bffa;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #5c6b7f; /* Match mountain palette */
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background: #4a5a6f;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .error {
+            color: #ff4040;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="sun"></div>
+        <div class="clouds"></div>
+        <div class="clouds"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="fog"></div>
+    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Sign In</button>
+            <p class="error" id="errorMessage">Invalid username or password</p>
+        </form>
+        <h3>if new <a href="{% url 'register'%}">sign up</a></h3>
+    </div>
+
+
+</body>
+</html>

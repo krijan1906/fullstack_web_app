@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration with Ninja Stars</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #1a1a1a;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ninja-star {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            animation: rotate 1s linear infinite, move 6s linear infinite;
+        }
+        .ninja-star div {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 15px 25px 15px;
+            border-color: transparent transparent #ff4444 transparent;
+            transform-origin: center;
+        }
+        .ninja-star div:nth-child(1) { transform: rotate(0deg); }
+        .ninja-star div:nth-child(2) { transform: rotate(45deg); }
+        .ninja-star div:nth-child(3) { transform: rotate(90deg); }
+        .ninja-star div:nth-child(4) { transform: rotate(135deg); }
+        .ninja-star div:nth-child(5) { transform: rotate(180deg); }
+        .ninja-star div:nth-child(6) { transform: rotate(225deg); }
+        .ninja-star div:nth-child(7) { transform: rotate(270deg); }
+        .ninja-star div:nth-child(8) { transform: rotate(315deg); }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes move {
+            0% { top: 0; left: 0; }
+            25% { top: 20%; left: 80%; }
+            50% { top: 80%; left: 20%; }
+            75% { top: 60%; left: 90%; }
+            100% { top: 0; left: 0; }
+        }
+        .ninja-star:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .ninja-star:nth-child(2) { top: 30%; left: 70%; animation-delay: 1s; }
+        .ninja-star:nth-child(3) { top: 60%; left: 30%; animation-delay: 2s; }
+        .ninja-star:nth-child(4) { top: 80%; left: 50%; animation-delay: 3s; }
+        .ninja-star:nth-child(5) { top: 20%; left: 90%; animation-delay: 4s; }
+        .container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+            backdrop-filter: blur(5px); /* Maintains readability with blur */
+            color: #FFFFFF; /* Changed text color to white */
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+            color: #FFFFFF; /* Changed label text color to white */
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: box-sizing;
+            background-color: rgba(255, 255, 255, 0); /* Fully transparent input background */
+            color: #FFFFFF; /* Changed input text color to white */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="ninja-star"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ninja-star"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ninja-star"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ninja-star"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="ninja-star"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="container">
+        <h2>Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <h3>if already have acciount <a href="{% url 'login'%}">login</a></h3>
+    </div>
+</body>
+</html>
