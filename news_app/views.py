@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,redirect,get_object_or_404
 from django.contrib.auth.models import User
-from .models import Data
+from .models import news_datas
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from datetime import datetime , timedelta
@@ -17,7 +17,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-def Inputs(request):
+def news_upload(request):
     if request.method=='POST':
         title=request.POST.get('title')
         contact=request.POST.get('contact')
@@ -25,7 +25,7 @@ def Inputs(request):
         date=request.POST.get('created_at')
         image=request.FILES.get('image')
 
-        input_data=Data(
+        input_data=news_datas(
             title=title,
             contact=contact,
             catagory=catagory,
@@ -35,8 +35,8 @@ def Inputs(request):
         input_data.save()
         return redirect('front')
     return render(request,'upload.html')   
-def Front(request):
-    data = Data.objects.all()
+def news_home(request):
+    data = news_datas.objects.all()
     
     
     return render(request,'front.html',{'data':data})
@@ -82,15 +82,15 @@ def Register(request):
 
     return render(request, 'register.html')
 
-def delete(request,Id):
+def delete_news(request,Id):
     
-    data = get_object_or_404(Data, id=Id)
+    data = get_object_or_404(news_datas, id=Id)
     data.delete()
     return redirect('front') 
 
 
-def update(request, id):
-    data = get_object_or_404(Data, id=id)
+def update_news(request, id):
+    data = get_object_or_404(news_datas, id=id)
 
     if request.method == 'POST':
         data.title = request.POST.get('title')
@@ -128,5 +128,11 @@ def Login(request):
 
 
     return render(request, 'login.html')
+
+
+def log_out(request):
+    logout(request)
+    messages.success(request, 'You have been logged out successfully.')
+    return redirect('login')    
          
     
