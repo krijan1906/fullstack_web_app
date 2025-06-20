@@ -7,10 +7,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('register/',views.Register,name='register'),
     path('',views.Login,name='login'),
-    path('news/',views.Inputs,name='news'),
-    path('home/',views.Front,name='front'),
-    path('delete/<int:Id>/', views.delete, name='delete'),
-    path('update/<int:id>/', views.update,name='update'),
+    path('news/',views.news_upload,name='news'),
+    path('home/',views.news_home,name='front'),
+    path('delete/<int:Id>/', views.delete_news, name='delete'),
+    path('update/<int:id>/', views.update_news,name='update'),
+    path('logout/',views.log_out,name='logout'),
     
 
     

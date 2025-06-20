@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Data (models.Model):
+class news_datas (models.Model):
     title=models.TextField(max_length=100)
     contact=models.TextField(max_length=100)
     catagory=models.TextField(max_length=100)
